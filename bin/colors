@@ -8,8 +8,6 @@ do
   echo -e \
           "\e[${color}mHello Colors\e[0m" \
           ' | ' \
-          'Hello Colors' \
-          ' | ' \
           '\\e['"${color}"'mHello Colors' \
           && :
 done
@@ -22,8 +20,6 @@ for color in {1..256}; do
   echo -e \
           "\e[38;5;${color}mHello Colors\e[0m" \
           ' | ' \
-          'Hello Colors' \
-          ' | ' \
           '\\e[38;5;'"${color}"'mHello Colors' \
           && :
 done
@@ -35,8 +31,6 @@ echo
 for color in {1..256}; do
   echo -e \
           "\e[48;5;${color}mHello Colors\e[0m" \
-          ' | ' \
-          'Hello Colors' \
           ' | ' \
           '\\e[48;5;'"${color}"'mHello Colors' \
           && :
