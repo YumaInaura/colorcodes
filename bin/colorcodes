@@ -13,6 +13,11 @@ for arg in $@; do
   if [ "$arg" == '--help' ]; then echo "$help" && exit; fi
 done
 
+display_title() {
+  local title="$1"
+  echo ============= "$title" ===============
+}
+
 display_color() {
   local display_text="$1"
   local code="$2"
@@ -32,14 +37,12 @@ do
   display_color "$text" "$color"
 done
 
-echo ============= 256 Colors ===============
-
+display_title "256 colors"
 for color in {1..256}; do
   display_color "$text" "38;5;$color"
 done
 
-echo ============= 256 Background Colors ===============
-
+display_title "256 Background colors"
 for color in {1..256}; do
   display_color "$text" "48;5;$color"
 done
