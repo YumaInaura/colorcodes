@@ -10,7 +10,7 @@ do
           ' | ' \
           'Hello Colors' \
           ' | ' \
-          '\\e['"${color}"'mHello Colors\\e[0m' \
+          '\\e['"${color}"'mHello Colors' \
           && :
 done
 
