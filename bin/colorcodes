@@ -18,7 +18,7 @@ display_title() {
   echo ============= "$title" ===============
 }
 
-display_color() {
+display() {
   local display_text="$1"
   local code="$2"
 
@@ -32,27 +32,27 @@ display_color() {
 display_title "8 Sets"
 for color in {1..8}
 do
-  display_color "$text" "$color"
+  display "$text" "$color"
 done
 
 display_title "16 Colors ( + 1 Deafult Color )"
 for color in {30..37} {90..97} {39..39}; do
-  display_color "$text" "$color"
+  display "$text" "$color"
 done
 
 display_title "16 Background Colors ( + 1 Default Background Color)"
 for color in {40..47} {100..107} {49..49}; do
-  display_color "$text" "$color"
+  display "$text" "$color"
 done
 
 display_title "256 colors"
 for color in {1..256}; do
-  display_color "$text" "38;5;$color"
+  display "$text" "38;5;$color"
 done
 
 display_title "256 Background Colors"
 for color in {1..256}; do
-  display_color "$text" "48;5;$color"
+  display "$text" "48;5;$color"
 done
 
 # Ref
