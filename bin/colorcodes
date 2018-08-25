@@ -13,36 +13,35 @@ for arg in $@; do
   if [ "$arg" == '--help' ]; then echo "$help" && exit; fi
 done
 
+display_color() {
+  local display_text="$1"
+  local code="$2"
+
+  echo -e \
+          "\e[${code}m"${display_text}"\e[0m" \
+          ' | ' \
+          '\\e['"${code}"'m'"${display_text}"'\\e[0m' \
+          && :
+}
+
 for color in \
     {1..8} \
-    {39} {30..37} {90..97} \
+    {39..39} {30..37} {90..97} \
     {49..47} {100..107};
 do
-  echo -e \
-          "\e[${color}m"$text"\e[0m" \
-          ' | ' \
-          '\\e['"${color}"'m'"${text}"'\\e[0m' \
-          && :
+  display_color "$text" "$color"
 done
 
 echo ============= 256 Colors ===============
 
 for color in {1..256}; do
-  echo -e \
-          "\e[38;5;${color}m${text}\e[0m" \
-          ' | ' \
-          '\\e[38;5;'"${color}"'m'"${text}"'\\e[0m' \
-          && :
+  display_color "$text" "38;5;$color"
 done
 
 echo ============= 256 Background Colors ===============
 
 for color in {1..256}; do
-  echo -e \
-          "\e[48;5;${color}m${text}\e[0m" \
-          ' | ' \
-          '\\e[48;5;'"${color}"'m'"$text"'\\e[0m' \
-          && :
+  display_color "$text" "48;5;$color"
 done
 
 # Ref
