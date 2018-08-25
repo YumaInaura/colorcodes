@@ -6,6 +6,7 @@ readonly help=$(cat <<HELP
 usage colorcodes [options] [<show_text>]
   options:
     --help this
+    --all Display 256 colors * 256 Background Colors = 65536 Colors
 HELP
 )
 
@@ -18,7 +19,7 @@ display_title() {
   echo ============= "$title" ===============
 }
 
-display_color() {
+display() {
   local display_text="$1"
   local code="$2"
 
@@ -29,30 +30,43 @@ display_color() {
           && :
 }
 
+display_all() {
+  display_title "256 colors * 256 Background Colors = 65536 Colors"
+  for background_color in {1..256}; do
+    for text_color in {1..256}; do
+      display "$text" "48;5;${background_color};38;5;${text_color}"
+    done
+  done
+}
+
+for arg in $@; do
+  if [ "$arg" == '--all' ]; then display_all && exit; fi
+done
+
 display_title "8 Sets"
 for color in {1..8}
 do
-  display_color "$text" "$color"
+  display "$text" "$color"
 done
 
 display_title "16 Colors ( + 1 Deafult Color )"
 for color in {30..37} {90..97} {39..39}; do
-  display_color "$text" "$color"
+  display "$text" "$color"
 done
 
 display_title "16 Background Colors ( + 1 Default Background Color)"
 for color in {40..47} {100..107} {49..49}; do
-  display_color "$text" "$color"
+  display "$text" "$color"
 done
 
 display_title "256 colors"
 for color in {1..256}; do
-  display_color "$text" "38;5;$color"
+  display "$text" "38;5;$color"
 done
 
 display_title "256 Background Colors"
 for color in {1..256}; do
-  display_color "$text" "48;5;$color"
+  display "$text" "48;5;$color"
 done
 
 # Ref
