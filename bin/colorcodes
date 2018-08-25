@@ -6,6 +6,7 @@ readonly help=$(cat <<HELP
 usage colorcodes [options] [<show_text>]
   options:
     --help this
+    --all Display 256 colors * 256 Background Colors = 65536 Colors
 HELP
 )
 
@@ -28,6 +29,19 @@ display() {
           '\\e['"${code}"'m'"${display_text}"'\\e[0m' \
           && :
 }
+
+display_all() {
+  display_title "256 colors * 256 Background Colors = 65536 Colors"
+  for background_color in {1..256}; do
+    for text_color in {1..256}; do
+      display "$text" "48;5;${background_color};38;5;${text_color}"
+    done
+  done
+}
+
+for arg in $@; do
+  if [ "$arg" == '--all' ]; then display_all && exit; fi
+done
 
 display_title "8 Sets"
 for color in {1..8}
