@@ -2,6 +2,17 @@
 
 readonly text=${1:-"Hello Colors"}
 
+readonly help=$(cat <<HELP
+usage colorcodes [options] [<show_text>]
+  options:
+    --help this
+HELP
+)
+
+for arg in $@; do
+  if [ "$arg" == '--help' ]; then echo "$help" && exit; fi
+done
+
 for color in \
     {1..8} \
     {39..37} {90..97} \
