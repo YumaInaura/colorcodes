@@ -1,0 +1,19 @@
+#!/usr/bin/env bash -eu
+
+for color in \
+    {1..8} \
+    {39..37} {90..97} \
+    {49..47} {100..107};
+do
+  echo -e \
+          "\e[${color}mHello Colors\e[0m" \
+          ' | ' \
+          'Hello Colors' \
+          ' | ' \
+          '\\e['"${color}"'mHello Colors\\e[0m' \
+          && :
+done
+
+# Ref
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+
