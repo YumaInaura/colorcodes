@@ -1,38 +1,47 @@
 #!/usr/bin/env bash -eu
 
+readonly text=${1:-"Hello Colors"}
+
+readonly help=$(cat <<HELP
+usage colorcodes [options] [<show_text>]
+  options:
+    --help this
+HELP
+)
+
+for arg in $@; do
+  if [ "$arg" == '--help' ]; then echo "$help" && exit; fi
+done
+
 for color in \
     {1..8} \
     {39..37} {90..97} \
     {49..47} {100..107};
 do
   echo -e \
-          "\e[${color}mHello Colors\e[0m" \
+          "\e[${color}m"$text"\e[0m" \
           ' | ' \
-          '\\e['"${color}"'mHello Colors' \
+          '\\e['"${color}"'m'"${text}"'\\e[0m' \
           && :
 done
 
-echo
 echo ============= 256 Colors ===============
-echo
 
 for color in {1..256}; do
   echo -e \
-          "\e[38;5;${color}mHello Colors\e[0m" \
+          "\e[38;5;${color}m${text}\e[0m" \
           ' | ' \
-          '\\e[38;5;'"${color}"'mHello Colors' \
+          '\\e[38;5;'"${color}"'m'"${text}"'\\e[0m' \
           && :
 done
 
-echo
 echo ============= 256 Background Colors ===============
-echo
 
 for color in {1..256}; do
   echo -e \
-          "\e[48;5;${color}mHello Colors\e[0m" \
+          "\e[48;5;${color}m${text}\e[0m" \
           ' | ' \
-          '\\e[48;5;'"${color}"'mHello Colors' \
+          '\\e[48;5;'"${color}"'m'"$text"'\\e[0m' \
           && :
 done
 
