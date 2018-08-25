@@ -10,7 +10,21 @@ do
           ' | ' \
           'Hello Colors' \
           ' | ' \
-          '\\e['"${color}"'mHello Colors\\e[0m' \
+          '\\e['"${color}"'mHello Colors' \
+          && :
+done
+
+echo
+echo ============= 256 Colors ===============
+echo
+
+for color in {1..256}; do
+  echo -e \
+          "\e[38;5;${color}mHello Colors\e[0m" \
+          ' | ' \
+          'Hello Colors' \
+          ' | ' \
+          '\\e[38;5;'"${color}"'mHello Colors' \
           && :
 done
 
