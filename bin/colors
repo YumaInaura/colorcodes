@@ -28,6 +28,20 @@ for color in {1..256}; do
           && :
 done
 
+echo
+echo ============= 256 Background Colors ===============
+echo
+
+for color in {1..256}; do
+  echo -e \
+          "\e[48;5;${color}mHello Colors\e[0m" \
+          ' | ' \
+          'Hello Colors' \
+          ' | ' \
+          '\\e[48;5;'"${color}"'mHello Colors' \
+          && :
+done
+
 # Ref
 # https://misc.flogisoft.com/bash/tip_colors_and_formatting
 
